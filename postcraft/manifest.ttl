@@ -1,0 +1,42 @@
+### manifest.ttl for ###
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix : <http://purl.org/stuff/transmissions/> .
+
+# md-
+:entryDefaults a :ConfigSet ;
+    :baseURI <https://strandz.it/blog> ;
+    :creatorName "Danny" ;
+    :creatorURI <https://danny.ayers.name/me> .
+
+###################
+
+<https://strandz.it> a :Site ;
+    rdfs:label "strandz.it" ;
+    dcterms:title "Strandz" .
+# this should maybe give the contentgroup a renderType, indirect with template etc
+
+:dirWalker a :ConfigSet ;
+   :sourceDir "/home/danny/sites/strandz.it/postcraft/content-raw" .
+
+:articleContentTemplate a :ConfigSet ;
+    :templateFilename "layouts/middlin/templates/article-content.njk" .
+
+:articlePageTemplate a :ConfigSet ;
+    :templateFilename "layouts/middlin/templates/article-page.njk" .
+
+# POST PAGES (HTML)
+:EntryPages a :ContentGroup ;
+    :targetDirectory "public/entries" .
+
+# FRONT PAGE (HTML)
+:HtmlIndex a :ContentItem ;
+    :filepath "public/index.html" .
+
+# FRONT PAGE (Atom)
+:AtomIndex a :ContentItem ;
+    :filepath "public/index.xml" .
+
