@@ -12,23 +12,26 @@
     :templateFilename "system/sparql-templates/store-article.njk" ;
     :endpointSettings "system/endpoints.json" .
 
-# #:todo needs sensible/test defaults
+### for sparqlstore-to-html
 :selectArticles a :ConfigSet ;
     :templateFilename "system/sparql-templates/select-articles.njk" ;
     :endpointSettings "system/endpoints.json" .
 
+:recordRendering a :ConfigSet ;
+    :dataBlock "contentBlocks" ;
+    :templateFilename "system/sparql-templates/record-rendering.njk" ;
+    :endpointSettings "system/endpoints.json" .
+
 ###################
-
-
 
 :dirWalker a :ConfigSet ;
    :sourceDir "/home/danny/sites/strandz.it/postcraft/content/raw" .
 
 :articleContentTemplate a :ConfigSet ;
-    :templateFilename "layouts/middlin/templates/article-content.njk" .
+    :templateFilename "layout/base/templates/article-content.njk" .
 
 :articlePageTemplate a :ConfigSet ;
-    :templateFilename "layouts/middlin/templates/article-page.njk" .
+    :templateFilename "layout/base/templates/article-page.njk" .
 
 # POST PAGES (HTML)
 :EntryPages a :ContentGroup ;
