@@ -6,21 +6,23 @@
 
 @prefix : <http://purl.org/stuff/transmissions/> .
 
-# md-
-:entryDefaults a :ConfigSet ;
-    :baseURI <https://strandz.it/blog> ;
-    :creatorName "Danny" ;
-    :creatorURI <https://danny.ayers.name/me> .
+# for md-to-sparqlstore
+:storeArticle a :ConfigSet ;
+    :dataBlock "contentBlocks" ;
+    :templateFilename "system/sparql-templates/store-article.njk" ;
+    :endpointSettings "system/endpoints.json" .
+
+# #:todo needs sensible/test defaults
+:selectArticles a :ConfigSet ;
+    :templateFilename "system/sparql-templates/select-articles.njk" ;
+    :endpointSettings "system/endpoints.json" .
 
 ###################
 
-<https://strandz.it> a :Site ;
-    rdfs:label "strandz.it" ;
-    dcterms:title "Strandz" .
-# this should maybe give the contentgroup a renderType, indirect with template etc
+
 
 :dirWalker a :ConfigSet ;
-   :sourceDir "/home/danny/sites/strandz.it/postcraft/content-raw" .
+   :sourceDir "/home/danny/sites/strandz.it/postcraft/content/raw" .
 
 :articleContentTemplate a :ConfigSet ;
     :templateFilename "layouts/middlin/templates/article-content.njk" .
@@ -40,3 +42,15 @@
 :AtomIndex a :ContentItem ;
     :filepath "public/index.xml" .
 
+### not yet used?
+
+<https://strandz.it> a :Site ;
+    rdfs:label "strandz.it" ;
+    dcterms:title "Strandz" .
+# this should maybe give the contentgroup a renderType, indirect with template etc
+
+# md-
+:entryDefaults a :ConfigSet ;
+    :baseURI <https://strandz.it/blog> ;
+    :creatorName "Danny" ;
+    :creatorURI <https://danny.ayers.name/me> .
