@@ -22,7 +22,31 @@
     :templateFilename "system/sparql-templates/record-rendering.njk" ;
     :endpointSettings "system/endpoints.json" .
 
+# index
+:recentArticles a :ConfigSet ;
+    :templateFilename "system/sparql-templates/recent-articles.njk" ;
+    :endpointSettings "system/endpoints.json" .
+
+:indexResultIterator a :ConfigSet ;
+  :forEach "queryResults.results.bindings" .
+
+:prepRecents a :ConfigSet  ;
+    :remove "queryResults" ;
+    :rename (:pc1 :pc2 :pc3 :pu1)  .
+
+        :pc1   :pre    "currentItem.title.vvvvalue" ;
+              :post "contentBlocks.title"  .
+        :pc2   :pre    "currentItem.html.value" ;
+              :post  "contentBlocks.html"  .
+        :pc3   :pre    "currentItem.created.value" ;
+              :post  "contentBlocks.created"  .
+
+        :pu1     :pre    "currentItem.article.value" ;
+                :post   "contentBlocks.uri"  .
+
 ###################
+
+
 
 :dirWalker a :ConfigSet ;
    :sourceDir "/home/danny/sites/strandz.it/postcraft/content/raw" .
