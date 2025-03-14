@@ -33,8 +33,7 @@
 :prepRecents a :ConfigSet  ;
     :remove "queryResults" ;
     :rename (:pc1 :pc2 :pc3 :pu1)  .
-
-        :pc1   :pre    "currentItem.title.vvvvalue" ;
+        :pc1   :pre    "currentItem.title.value" ;
               :post "contentBlocks.title"  .
         :pc2   :pre    "currentItem.html.value" ;
               :post  "contentBlocks.html"  .
@@ -43,6 +42,13 @@
 
         :pu1     :pre    "currentItem.article.value" ;
                 :post   "contentBlocks.uri"  .
+
+:accumulator a :ConfigSet ;
+    :label "test" ;
+    :sourceField "currentItem.html.value" .
+
+:htmlIndex a :ConfigSet ;
+    :templateFilename "layout/base/templates/index-html.njk" .
 
 ###################
 
