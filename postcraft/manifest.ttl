@@ -50,40 +50,29 @@
 :htmlIndex a :ConfigSet ;
     :templateFilename "layout/base/templates/index-html.njk" .
 
+:atomIndex a :ConfigSet ;
+    :templateFilename "layout/base/templates/index-atom.njk" .
+
 ###################
 
+:htmlFilepath a :ConfigSet ;
+  :asPath true ;
+  :targetField "destinationFile" ;
+  :values (:ip1 :ip2 :ip3) .
+  :ip1 :field "targetPath" .
+  :ip2 :string "public" .
+  :ip3 :string "index.html" .
 
+:contentLocationA  a :ConfigSet ;
+    :contentField "accumulate" .
 
-:dirWalker a :ConfigSet ;
-   :sourceDir "/home/danny/sites/strandz.it/postcraft/content/raw" .
+:contentLocationB  a :ConfigSet ;
+    :contentField "accumulate" .
 
-:articleContentTemplate a :ConfigSet ;
-    :templateFilename "layout/base/templates/article-content.njk" .
-
-:articlePageTemplate a :ConfigSet ;
-    :templateFilename "layout/base/templates/article-page.njk" .
-
-# POST PAGES (HTML)
-:EntryPages a :ContentGroup ;
-    :targetDirectory "public/entries" .
-
-# FRONT PAGE (HTML)
-:HtmlIndex a :ContentItem ;
-    :filepath "public/index.html" .
-
-# FRONT PAGE (Atom)
-:AtomIndex a :ContentItem ;
-    :filepath "public/index.xml" .
-
-### not yet used?
-
-<https://strandz.it> a :Site ;
-    rdfs:label "strandz.it" ;
-    dcterms:title "Strandz" .
-# this should maybe give the contentgroup a renderType, indirect with template etc
-
-# md-
-:entryDefaults a :ConfigSet ;
-    :baseURI <https://strandz.it/blog> ;
-    :creatorName "Danny" ;
-    :creatorURI <https://danny.ayers.name/me> .
+:atomFilepath a :ConfigSet ;
+  :asPath true ;
+  :targetField "destinationFile" ;
+  :values (:ip1 :ip2 :ip3) .
+  :ip1 :field "targetPath" .
+  :ip2 :string "public" .
+  :ip3 :string "atom.xml" .
