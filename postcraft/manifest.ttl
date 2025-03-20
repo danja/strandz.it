@@ -7,22 +7,36 @@
 @prefix : <http://purl.org/stuff/transmissions/> .
 
 # for md-to-sparqlstore
+
+:dirWalker a :ConfigSet ;
+   :sourceDir "content/raw" .
+
 :storeArticle a :ConfigSet ;
     :dataBlock "contentBlocks" ;
     :templateFilename "system/sparql-templates/store-article.njk" ;
     :endpointSettings "system/endpoints.json" .
 
 ### for sparqlstore-to-html
+:resultIterator a :ConfigSet ;
+  :forEach "queryResults.results.bindings" ;
+  :remove "queryResults" .
+
 :selectArticles a :ConfigSet ;
     :templateFilename "system/sparql-templates/select-articles.njk" ;
     :endpointSettings "system/endpoints.json" .
+
+:articleContentTemplate a :ConfigSet ;
+    :templateFilename "layout/base/templates/article-content.njk" .
+
+:articlePageTemplate a :ConfigSet ;
+    :templateFilename "layout/base/templates/article-page.njk" .
 
 :recordRendering a :ConfigSet ;
     :dataBlock "contentBlocks" ;
     :templateFilename "system/sparql-templates/record-rendering.njk" ;
     :endpointSettings "system/endpoints.json" .
 
-# index
+# Select for index
 :recentArticles a :ConfigSet ;
     :templateFilename "system/sparql-templates/recent-articles.njk" ;
     :endpointSettings "system/endpoints.json" .
