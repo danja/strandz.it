@@ -9,10 +9,10 @@
 #######################
 # for md-to-sparqlstore
 
-:dirWalker a :ConfigSet ;
+:mts10-dirWalker a :ConfigSet ;
    :sourceDir "content/raw" .
 
-:storeArticle a :ConfigSet ;
+:mts40-storeArticle a :ConfigSet ;
     :dataBlock "contentBlocks" ;
     :templateFilename "system/sparql-templates/store-article.njk" ;
     :endpointSettings "system/endpoints.json" .
