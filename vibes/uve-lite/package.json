@@ -1,0 +1,29 @@
+{
+  "name": "uve",
+  "version": "0.1.0",
+  "description": "Universal Virtual Environment - 3D visualization for conceptual spaces",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack",
+    "test": "echo \"No tests configured yet\""
+  },
+  "keywords": [
+    "3d",
+    "visualization",
+    "threejs",
+    "rdf"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  }
+}
