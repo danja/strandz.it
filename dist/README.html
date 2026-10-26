@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>strandz</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1b1b1b;
+      --muted: #666666;
+      --accent: #006b52;
+      --border: #dddddd;
+      --code-bg: #f4f4f2;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --fg: #e9e9e6;
+        --muted: #9a9a94;
+        --accent: #69d3b4;
+        --border: #333333;
+        --code-bg: #1c1c1b;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { font-size: 18px; }
+
+    body {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-header a {
+      color: var(--fg);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-header .source {
+      overflow: hidden;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-overflow: ellipsis;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    h1, h2, h3, h4 {
+      line-height: 1.25;
+      margin-top: 2.25em;
+      margin-bottom: 0.6em;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    h2 { font-size: 1.45rem; }
+    h3 { font-size: 1.15rem; }
+
+    a { color: var(--accent); }
+
+    img { max-width: 100%; height: auto; }
+
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    code {
+      padding: 0.12em 0.3em;
+      background: var(--code-bg);
+      border-radius: 3px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 1rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      line-height: 1.45;
+    }
+
+    pre code {
+      padding: 0;
+      background: none;
+    }
+
+    blockquote {
+      margin: 1.5rem 0;
+      padding: 0.1rem 1rem;
+      border-left: 3px solid var(--border);
+      color: var(--muted);
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    th, td {
+      padding: 0.45rem 0.65rem;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--code-bg); }
+
+    hr {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html">strandz</a>
+    <span class="source">README.md</span>
+  </header>
+  <main>
+<h1>strandz</h1>
+<p>site</p>
+<h2>Build</h2>
+<p>Pages are written in Markdown and converted to HTML by <code>build.js</code>.</p>
+<pre><code class="language-sh">npm install
+npm run build
+</code></pre>
+<p>The generated site goes to <code>dist/</code>, keeping the source directory structure.
+<code>INDEX.md</code> becomes <code>index.html</code>, and links between <code>.md</code> files are rewritten
+to point at the generated <code>.html</code> pages.</p>
+<p>To write the HTML next to the Markdown sources instead:</p>
+<pre><code class="language-sh">npm run build:in-place
+</code></pre>
+<p>To choose another output directory:</p>
+<pre><code class="language-sh">node build.js --out &lt;dir&gt;
+</code></pre>
+
+  </main>
+  <footer>Generated from <code>README.md</code>.</footer>
+</body>
+</html>

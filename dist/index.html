@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1b1b1b;
+      --muted: #666666;
+      --accent: #006b52;
+      --border: #dddddd;
+      --code-bg: #f4f4f2;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --fg: #e9e9e6;
+        --muted: #9a9a94;
+        --accent: #69d3b4;
+        --border: #333333;
+        --code-bg: #1c1c1b;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { font-size: 18px; }
+
+    body {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-header a {
+      color: var(--fg);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-header .source {
+      overflow: hidden;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-overflow: ellipsis;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    h1, h2, h3, h4 {
+      line-height: 1.25;
+      margin-top: 2.25em;
+      margin-bottom: 0.6em;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    h2 { font-size: 1.45rem; }
+    h3 { font-size: 1.15rem; }
+
+    a { color: var(--accent); }
+
+    img { max-width: 100%; height: auto; }
+
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    code {
+      padding: 0.12em 0.3em;
+      background: var(--code-bg);
+      border-radius: 3px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 1rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      line-height: 1.45;
+    }
+
+    pre code {
+      padding: 0;
+      background: none;
+    }
+
+    blockquote {
+      margin: 1.5rem 0;
+      padding: 0.1rem 1rem;
+      border-left: 3px solid var(--border);
+      color: var(--muted);
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    th, td {
+      padding: 0.45rem 0.65rem;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--code-bg); }
+
+    hr {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html">strandz</a>
+    <span class="source">INDEX.md</span>
+  </header>
+  <main>
+<h1>Projects</h1>
+<p>An index of the 18 projects in <a href="repo-list.html"><code>repo-list.md</code></a>, grouped by what they do.
+Each entry is summarised from that project&#39;s own README.</p>
+<h2>Synthesizers &amp; Instruments</h2>
+<h3><a href="https://github.com/danja/flues">flues</a></h3>
+<p>A long-running collection of synthesis experiments covering physical modelling, formant
+speech synthesis, distortion algorithms, and hybrid instruments. Ideas start as browser
+apps (Web Audio API) and often grow into LV2 plugins, native GTK4 apps, and Raspberry Pi
+synths. Includes Stove, Chatterbox, Clarinet, Trajectory, Disyn, Floozy, Drumkit, and
+around thirty LV2 plugins. <a href="https://danja.github.io/flues/">Live demos</a></p>
+<h3><a href="https://github.com/danja/downspout">downspout</a></h3>
+<p>A large collection of mostly generative, algorithmic VST3 plugins built on DPF, with
+portable C++ cores, deterministic tests, and custom NanoVG UIs. It spans MIDI generators
+(bassgen, melgen, drumgen, arpgen, cadence, ground, luma, lifeform), instruments (syrinx,
+floozy, basilico, campione, canticle, moka, plank, pratt), and effects (lightverb, ambo,
+rift, orchid, loopdelay, p-mix, e-mix, t-mix).</p>
+<h3><a href="https://github.com/danja/valis">valis</a></h3>
+<p><strong>Virtual Analog LLM Integrated System</strong> — a standalone app and DAW plugin for building
+virtual analog circuits, effectively a factory for instruments and effects. Circuits are
+RDF/Turtle descriptions presented through three views: Controls, Circuit, and Code. The
+45-element engine is also fully drivable over MCP, so an LLM can design and build circuits.</p>
+<h3><a href="https://github.com/danja/claudius">claudius</a></h3>
+<p>An ESP32 Eurorack synth voice built around <em>harmonic cascade synthesis</em>: up to eight
+harmonics, each with its own decay envelope, so notes start bright and mellow over time.
+Adds wavefolding and Lorenz-attractor chaos modulation. Designed by Claude AI for the
+same hardware platform as <code>disyn-esp32</code>.</p>
+<h3><a href="https://github.com/danja/disyn-esp32">disyn-esp32</a></h3>
+<p>A Eurorack module built around an ESP32 DevKit V1, running the UI on one core and DSP on
+the other. Implements 19 Disyn algorithms plus a calibration test tone, with an OLED UI,
+encoder control, CV/pot modulation routing, and I2S DAC output. Marked untested on
+hardware in its README.</p>
+<h3><a href="https://github.com/danja/daisy-maybe">daisy-maybe</a></h3>
+<p>A collection of firmwares for the kxmx_bluemchen Eurorack module: DSF synthesis, dual
+delay-line resonators, the spectral processors Slime and Uzi, the Dirac granular synth,
+and the 17-algorithm Neurotic suite.</p>
+<h2>Music Production &amp; Live Coding</h2>
+<h3><a href="https://github.com/danja/transmission">transmission</a></h3>
+<p><strong>A Generative Audio Workstation for Linux.</strong> A graph-based environment for patching VST3
+plugins, MIDI generators, instruments, effects, mixers, hardware ports, and system audio
+into evolving setups. Patches save as RDF Turtle, render offline to WAV/MP3, and can be
+edited live by an LLM through MCP.</p>
+<h3><a href="https://github.com/danja/janey">janey</a></h3>
+<p>Livecoding music in Janet, running in the browser as WebAssembly inside an AudioWorklet,
+with a small DSP core written in C. Patches are plain Janet that build a unit-generator
+graph, and can be hot-swapped while audio keeps running.</p>
+<h3><a href="https://github.com/danja/dogalog">dogalog</a></h3>
+<p>A realtime Prolog-based livecoding music environment: write logic rules to generate
+algorithmic rhythmic patterns and melodies. Browser PWA with a 13-step tutorial,
+Euclidean rhythms, scales, chords, probability, and stateful variation.
+<a href="https://danja.github.io/dogalog">Code live</a></p>
+<h3><a href="https://github.com/danja/melogen">melogen</a></h3>
+<p>Breed melodies and basslines by ear. A genetic algorithm proposes five candidates, you
+vote −/0/+, and the next generation is bred from your preferences — you are the fitness
+function. Vanilla ES-module PWA with no build step; plays through any
+<a href="https://strandz.it/jigdaw/">Jig</a> plugin and exports <code>.mid</code> files.</p>
+<h3><a href="https://github.com/danja/reaper-mcp">reaper-mcp</a></h3>
+<p>A Model Context Protocol server that lets AI agents control the REAPER DAW. Exposes 58
+tools across project management, tracks, MIDI, FX and instruments, mixing, mastering,
+rendering, and audio analysis.</p>
+<h2>Plugin Formats &amp; Catalogues</h2>
+<h3><a href="https://github.com/danja/jigdaw">jigdaw</a></h3>
+<p><strong>A plugin format native to the web.</strong> A plugin is a dereferenceable IRI — fetching it is
+installing it — described in Turtle with integrity digests for its Wasm module,
+AudioWorklet processor, and UI. The repository carries the normative specification, a
+browser host, a VST3 host, 35 worked plugins, and a SHACL validator.</p>
+<h3><a href="https://github.com/danja/plugin-universe">plugin-universe</a></h3>
+<p>An open database of DAW plugins, live at <a href="https://plugin-universe.com">plugin-universe.com</a>:
+756 plugins, 63,297 triples, and 288 measurements taken by running the binaries. Built
+ontology-first with RDF, SHACL, SPARQL, and embeddings for semantic search, plus a
+sandboxed profiler that records what actually happens when a plugin is loaded.</p>
+<h2>Audio Analysis &amp; Visualisation</h2>
+<h3><a href="https://github.com/danja/bpm">bpm</a></h3>
+<p>A real-time Flutter application that captures microphone audio and runs four BPM
+detection algorithms — energy onset, autocorrelation, FFT spectrum, and Haar-wavelet
+aggregation — streaming both individual and consensus tempo estimates, with a tempogram
+and PLP panel for transparency.</p>
+<h3><a href="https://github.com/danja/fluidmark">fluidmark</a></h3>
+<p>Watermarking for music: mark a track with an identifier and get it back out, inaudibly,
+after gain changes, dither, noise, filtering, resampling, cropping, MP3 compression down
+to 32 kbit/s, and speed or clock drift. A Rust core compiled to WebAssembly, a browser
+front end, Node tools, and an attack harness.</p>
+<h3><a href="https://github.com/danja/hillside">hillside</a></h3>
+<p>An interactive media player with six audio-reactive visualisations: cellular automata,
+flocking boids, an abelian sandpile, a Life + Lenia ecosystem, 3D rotating cubes, and a
+Chladni plate simulation. <a href="https://danja.github.io/hillside/">Demo</a></p>
+<h2>Hardware &amp; Retro Computing</h2>
+<h3><a href="https://github.com/danja/dog-2">dog-2</a></h3>
+<p><em>Danny&#39;s Obtuse Gadget v2</em> — a 1970s-style single-board computer running on an Arduino
+Nano with a TM1638 display and keypad. Inspired by the KIM-1 and MK14, with a custom
+instruction set, assembler, upload tooling, and an on-device test suite. A 2025 reboot of
+Dog-1 for PlatformIO.</p>
+<h2>Music Releases</h2>
+<h3><a href="https://dannyayers.bandcamp.com/album/attone">attone</a></h3>
+<p>An album by Danny Ayers / <em>Spike &amp; Wave</em>, with sleeve art, 16-bit 44.1 kHz WAV files, and
+a colophon. Also on
+<a href="https://www.youtube.com/playlist?list=PLcI4DK1XcRAHjA180H0dYr7Dvaju027RV">YouTube</a> and
+<a href="https://open.spotify.com/album/4RRP11wg5aI3zDugMt3gcr">Spotify</a>.</p>
+
+  </main>
+  <footer>Generated from <code>INDEX.md</code>.</footer>
+</body>
+</html>
