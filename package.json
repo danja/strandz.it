@@ -1,0 +1,17 @@
+{
+  "name": "strandz-it",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site build: generated HTML from Markdown",
+  "scripts": {
+    "build": "node build.js",
+    "build:in-place": "node build.js --in-place"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "marked": "^18.1.1"
+  }
+}
