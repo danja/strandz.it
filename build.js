@@ -14,10 +14,12 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import matter from 'gray-matter';
 import { marked } from 'marked';
 
 const SKIP_DIRS = new Set(['node_modules', '.git', '.hg', '.svn']);
 const DEFAULT_OUT = 'dist';
+const SITE_NAME = 'strandz';
 
 const HELP = `Usage: node build.js [options] [root]
 
@@ -30,6 +32,11 @@ Options:
 
 INDEX.md and index.md are both emitted as index.html. Other names keep their
 case: README.md becomes README.html. Links to .md files are rewritten to .html.
+
+Pages may start with YAML front matter. Supported fields include title,
+description, author, lang, canonical, image, ogType, keywords, tags, robots,
+noindex, date, and draft. Front matter is removed from the rendered page and
+used to fill the HTML head; draft: true skips the page.
 `;
 
 function parseArgs(argv) {
@@ -145,14 +152,75 @@ function extractTitle(markdown) {
   return heading ? tokenText(heading).replace(/\s+/g, ' ').trim() : '';
 }
 
-function renderPage({ title, body, source, indexHref }) {
+function asString(value) {
+  if (value instanceof Date) return value.toISOString();
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function asList(value) {
+  if (Array.isArray(value)) return value.map(asString).filter(Boolean);
+  const text = asString(value);
+  return text ? [text] : [];
+}
+
+function metaTag(attribute, key, value) {
+  if (!value) return '';
+  return `  <meta ${attribute}="${escapeHtml(key)}" content="${escapeHtml(value)}">\n`;
+}
+
+function linkTag(rel, href) {
+  if (!href) return '';
+  return `  <link rel="${escapeHtml(rel)}" href="${escapeHtml(href)}">\n`;
+}
+
+function renderHeadMeta({ title, data }) {
+  const siteName = asString(data.siteName) || SITE_NAME;
+  const description = asString(data.description);
+  const author = asString(data.author);
+  const keywords = [...asList(data.keywords), ...asList(data.tags)].join(', ');
+  const canonical = asString(data.canonical);
+  const image = asString(data.image);
+  const ogType = asString(data.ogType) || 'article';
+  const noindex = data.noindex === true || data.noindex === 'true';
+  const robots = asString(data.robots) || (noindex ? 'noindex, nofollow' : '');
+  const date = asString(data.date);
+
+  let out = '';
+  out += metaTag('name', 'description', description);
+  out += metaTag('name', 'author', author);
+  out += metaTag('name', 'keywords', keywords);
+  out += metaTag('name', 'robots', robots);
+  out += linkTag('canonical', canonical);
+  out += metaTag('property', 'og:site_name', siteName);
+  out += metaTag('property', 'og:type', ogType);
+  out += metaTag('property', 'og:title', title);
+  out += metaTag('property', 'og:description', description);
+  out += metaTag('property', 'og:url', canonical);
+  out += metaTag('property', 'og:image', image);
+  if (date && ogType === 'article') {
+    out += metaTag('property', 'article:published_time', date);
+  }
+  if (description || image) {
+    out += metaTag('name', 'twitter:card', image ? 'summary_large_image' : 'summary');
+    out += metaTag('name', 'twitter:title', title);
+    out += metaTag('name', 'twitter:description', description);
+    out += metaTag('name', 'twitter:image', image);
+  }
+  out += metaTag('name', 'generator', 'build.js');
+  return out;
+}
+
+function renderPage({ title, body, source, indexHref, meta = {} }) {
+  const lang = asString(meta.lang) || 'en';
+  const headMeta = renderHeadMeta({ title, data: meta });
+
   return `<!doctype html>
-<html lang="en">
+<html lang="${escapeHtml(lang)}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
-  <style>
+${headMeta}  <style>
     :root {
       color-scheme: light dark;
       --bg: #ffffff;
@@ -378,6 +446,20 @@ async function main() {
     const outRel = path.join(path.dirname(sourceRel), outputName(path.basename(file)));
     const outFile = path.join(outDir, outRel);
 
+    const raw = await fs.readFile(file, 'utf8');
+    let parsed;
+    try {
+      parsed = matter(raw);
+    } catch (error) {
+      throw new Error(`Could not parse front matter in ${sourceRel}: ${error.message}`);
+    }
+
+    const meta = parsed.data ?? {};
+    if (meta.draft === true || meta.draft === 'true') {
+      console.log(`  ${sourceRel} (draft, skipped)`);
+      continue;
+    }
+
     if (emitted.has(outFile)) {
       throw new Error(
         `Output collision: ${emitted.get(outFile)} and ${sourceRel} both produce ${toPosix(outRel)}`,
@@ -385,14 +467,17 @@ async function main() {
     }
     emitted.set(outFile, sourceRel);
 
-    const markdown = await fs.readFile(file, 'utf8');
-    const title = extractTitle(markdown) || path.basename(file, path.extname(file));
-    const body = marked.parse(markdown);
+    const title =
+      asString(meta.title) ||
+      extractTitle(parsed.content) ||
+      path.basename(file, path.extname(file));
+    const body = marked.parse(parsed.content);
     const html = renderPage({
       title,
       body,
       source: sourceRel,
       indexHref: indexHrefFor(outFile, outDir),
+      meta,
     });
 
     await fs.mkdir(path.dirname(outFile), { recursive: true });

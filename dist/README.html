@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>strandz</title>
+  <meta property="og:site_name" content="strandz">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="strandz">
+  <meta name="generator" content="build.js">
   <style>
     :root {
       color-scheme: light dark;
@@ -163,8 +167,29 @@
 npm run build
 </code></pre>
 <p>The generated site goes to <code>dist/</code>, keeping the source directory structure.
-<code>INDEX.md</code> becomes <code>index.html</code>, and links between <code>.md</code> files are rewritten
-to point at the generated <code>.html</code> pages.</p>
+<code>index.md</code> (or <code>INDEX.md</code>) becomes <code>index.html</code>, and links between <code>.md</code> files
+are rewritten to point at the generated <code>.html</code> pages.</p>
+<h2>Page metadata</h2>
+<p>Pages can set metadata in YAML front matter. It is removed from the rendered
+Markdown and used to fill the HTML <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-md">---
+title: Projects
+description: An index of projects, grouped by category.
+author: Danny Ayers
+lang: en
+canonical: https://strandz.it/
+ogType: website
+keywords:
+  - projects
+  - audio
+---
+
+# Projects
+</code></pre>
+<p>Supported fields: <code>title</code>, <code>description</code>, <code>author</code>, <code>lang</code>, <code>keywords</code>, <code>tags</code>,
+<code>canonical</code>, <code>image</code>, <code>ogType</code>, <code>siteName</code>, <code>robots</code>, <code>noindex</code>, <code>date</code>, and
+<code>draft</code>. Set <code>draft: true</code> to leave a page out of the build. If <code>title</code> is
+absent, the first <code>#</code> heading is used, falling back to the filename.</p>
 <p>To write the HTML next to the Markdown sources instead:</p>
 <pre><code class="language-sh">npm run build:in-place
 </code></pre>

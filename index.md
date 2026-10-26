@@ -1,3 +1,19 @@
+---
+title: Projects
+description: An index of Danny Ayers' 18 projects, grouped by what they do, from synthesizers and audio software to hardware experiments and music releases.
+author: Danny Ayers
+lang: en
+canonical: https://strandz.it/
+ogType: website
+keywords:
+  - projects
+  - audio software
+  - synthesizers
+  - live coding
+  - music
+  - Danny Ayers
+---
+
 # Projects
 
 An index of the 18 projects in [`repo-list.md`](repo-list.md), grouped by what they do.
